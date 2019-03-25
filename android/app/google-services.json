@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "71693737268",
+    "firebase_url": "https://theeye-4f65a.firebaseio.com",
+    "project_id": "theeye-4f65a",
+    "storage_bucket": "theeye-4f65a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71693737268:android:e679da8f0f370db7",
+        "android_client_info": {
+          "package_name": "com.elixir.theeye"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71693737268-nra9p25le4ic4flqg3jpmr7p4pglecn0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTWS5Nz8vFZsyOL4JbH7RsRNdS9wTBuDA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
