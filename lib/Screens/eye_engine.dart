@@ -31,7 +31,7 @@ class _EyeEngineState  extends State<EyeEngine>{
     super.initState();
     sub = new Stream.empty();
     subscription = sub.listen((_) => _getImageSize)..onDone(analyzeLabels);
-   // subscription = sub.listen(_)=> _getImageSize)..onDone(analyzeLabels);
+
   }
 
   void analyzeLabels() async{
@@ -156,8 +156,7 @@ class _EyeEngineState  extends State<EyeEngine>{
         child: Center(
           child: Text( " NOTHING DETECTED ",
                  style:Theme.of(context).textTheme.subhead ,),
-        )
-          ,
+        ),
       );
     }
       return Expanded(
@@ -179,13 +178,12 @@ class _EyeEngineState  extends State<EyeEngine>{
                   VisionFace res = list as VisionFace;
                   text = "Raw Value : ${res.smilingProbability}, ${res.trackingID}";
                   break;
-                case BARCODE_SCANNER:
+                case LABEL_SCANNER:
                   VisionLabel res = list as VisionLabel;
                   text = "Raw Value : ${res.label}";
                   break;
               }
               return Text( text);
-
             }
           ),
         )   ,

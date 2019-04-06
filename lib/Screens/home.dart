@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theeye/Screens/eye_engine.dart';
+import 'package:theeye/Screens/vision.dart';
 
 
 const String TEXT_SCANNER="TEXT SCANNER";
@@ -23,33 +24,50 @@ class _HomeState extends State<Home>{
   File _file;
   String _selectedScanner =FACE_SCANNER;
   Widget scannerTypeRowBuilder(){
-    return Wrap(
-      children: <Widget>[
-        RadioListTile<String>(
-          title: Text(" Text Recognition"),
-          groupValue: _selectedScanner,
-          value: TEXT_SCANNER,
-          onChanged: onScannerSelected,
-        ),
-        RadioListTile<String>(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      child: Card(
+          elevation: 5,
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border(left: BorderSide(
+                    color: Colors.deepOrangeAccent,
+                    style: BorderStyle.solid,
+                    width: 4.0
+                )
+                )
+            ),
+            child: Wrap(
+              children: <Widget>[
+                RadioListTile<String>(
+                  title: Text(" Text Recognition"),
+                  groupValue: _selectedScanner,
+                  value: TEXT_SCANNER,
+                  onChanged: onScannerSelected,
+                ),
+                /* RadioListTile<String>(
           title: Text(" Barcode Scanner"),
           groupValue: _selectedScanner,
           value: BARCODE_SCANNER,
           onChanged: onScannerSelected,
-        ),
-        RadioListTile<String>(
-          title: Text(" Label Scanner"),
-          groupValue: _selectedScanner,
-          value: LABEL_SCANNER,
-          onChanged: onScannerSelected,
-        ),
-        RadioListTile<String>(
-          title: Text(" Face Scanner"),
-          groupValue: _selectedScanner,
-          value: FACE_SCANNER,
-          onChanged: onScannerSelected,
-        )
-      ],
+        ),*/
+
+                RadioListTile<String>(
+                  title: Text(" Image Scanner"),
+                  groupValue: _selectedScanner,
+                  value: LABEL_SCANNER,
+                  onChanged: onScannerSelected,
+                ),
+                RadioListTile<String>(
+                  title: Text(" Face Scanner"),
+                  groupValue: _selectedScanner,
+                  value: FACE_SCANNER,
+                  onChanged: onScannerSelected,
+                )
+              ],
+            ),
+          )
+      ),
     );
   }
 
@@ -63,10 +81,31 @@ class _HomeState extends State<Home>{
               onPressed: (){
                 onImageSelector(CAMERA_SOURCE);
               },
-              color: Colors.blue,
-              textColor: Colors.white,
+              //color: Colors.blue,
+              //textColor: Colors.white,
               splashColor: Colors.blueGrey,
-              child: Text(" Camera "),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              elevation: 4.0,
+              color: Colors.deepPurpleAccent,
+              textColor: Colors.white,
+              // splashColor: Colors.deepOrange,
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical:12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.camera_alt),
+                      Text(
+                        ' Camera',
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800),
+                      )
+                    ],
+                  )
+              ),
             ),
           ),
         ),
@@ -76,11 +115,31 @@ class _HomeState extends State<Home>{
               onPressed: (){
                 onImageSelector(GALLERY_SOURCE);
               },
-              color: Colors.blue,
-              textColor: Colors.white,
+              //color: Colors.blue,
+             // textColor: Colors.white,
               splashColor: Colors.blueGrey,
-              child: Text(" Gallery "),
-            ),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))),
+              elevation: 4.0,
+              color: Colors.deepPurpleAccent,
+              textColor: Colors.white,
+              // splashColor: Colors.deepOrange,
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical:12.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.image),
+                      Text(
+                        ' Gallery',
+                        style: TextStyle(
+                            letterSpacing: 1,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w800),
+                      )
+                    ],
+                  )
+              ),            ),
           ),
         )
       ],
@@ -90,12 +149,13 @@ class _HomeState extends State<Home>{
   @override
   Widget build(BuildContext context) {
 
-    final chooser =List<Widget>();
-    chooser.add(Text("Choose Scanner"));
+   /* final chooser =List<Widget>();
+    //chooser.add(Text("Choose Scanner"));
     chooser.add(scannerTypeRowBuilder());
-    chooser.add(Text("Choose Image from"));
+   // SizedBox(height: 15,);
+    chooser.add(Text("Choose Image from", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),));
     chooser.add(imageSourceRowBuilder());
-
+*/
     // TODO: implement build
     return Scaffold(
       key:  _scaffoldKey,
@@ -103,11 +163,28 @@ class _HomeState extends State<Home>{
         title: Text("Choose the task"),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: chooser
-        ),
+
+      body: Container(
+          //color: Color(0xFFEEEEEE),
+         child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Center(
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                // children: chooser
+                children: <Widget>[
+                  SizedBox(height: 40,),
+                  scannerTypeRowBuilder(),
+                  SizedBox(height: 25,),
+                  Text("Choose Image from", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),),
+                  SizedBox(height: 25,),
+                  imageSourceRowBuilder(),
+                  SizedBox(height: 25,),
+
+                ],
+              ),
+            ),
+          )
       ),
     );
   }
@@ -133,7 +210,7 @@ class _HomeState extends State<Home>{
       }
       Navigator.push(
           context, MaterialPageRoute(
-          builder: (context)=>EyeEngine(file, _selectedScanner)));
+          builder: (context)=>Vision(file, _selectedScanner)));
 
     } catch (e){
       scaffold.showSnackBar(
